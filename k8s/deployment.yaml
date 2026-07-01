@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: atlas
+  namespace: paperclip
+  labels:
+    app: atlas
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: atlas
+  template:
+    metadata:
+      labels:
+        app: atlas
+    spec:
+      containers:
+        - name: atlas
+          image: image-registry.openshift-image-registry.svc:5000/paperclip/atlas:latest
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          envFrom:
+            - secretRef:
+                name: atlas-secrets
+            - configMapRef:
+                name: atlas-config
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: atlas
+  namespace: paperclip
+  labels:
+    app: atlas
+spec:
+  selector:
+    app: atlas
+  ports:
+    - port: 3000
+      targetPort: 3000
+      protocol: TCP

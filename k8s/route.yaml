@@ -1,0 +1,17 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: atlas
+  namespace: paperclip
+  labels:
+    app: atlas
+spec:
+  to:
+    kind: Service
+    name: atlas
+    weight: 100
+  port:
+    targetPort: 3000
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect

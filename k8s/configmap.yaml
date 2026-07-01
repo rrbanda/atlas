@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: atlas-config
+  namespace: paperclip
+  labels:
+    app: atlas
+data:
+  PAPERCLIP_API_URL: "http://paperclip:3100"
+  PAPERCLIP_COMPANY_ID: "52d75bd0-d5db-4aa3-ae5b-a991111c4e00"
+  NEXT_PUBLIC_APP_NAME: "ATLAS"

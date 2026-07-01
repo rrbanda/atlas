@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-atlas-bg: #0a0c14;
+  --color-atlas-card: #13151f;
+  --color-atlas-card-hover: #1a1d2b;
+  --color-atlas-border: #1e2130;
+  --color-atlas-text: #e8eaf0;
+  --color-atlas-text-muted: #8b8fa3;
+  --color-atlas-accent: #ee0000;
+  --color-atlas-accent-dim: #cc0000;
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--color-atlas-bg);
+  color: var(--color-atlas-text);
+}
